@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Health Record Assistant</title>
+    <script src="{{ url_for('static', filename='script-doc.js') }}"></script>
+</head>
+<body>
+    <h1>Patient Health Record Assistant</h1>
+
+    <!-- Form for querying patients by doctor, condition, or surgery -->
+    <form id="doctorForm" onsubmit="event.preventDefault(); fetchPatientData();">
+        <div id="searchType">
+            <label for="conditionRadio">Search by Condition:</label>
+            <input type="radio" id="conditionRadio" name="searchType" value="condition" onclick="toggleInputFields()">
+            <label for="doctorRadio">Search by Doctor:</label>
+            <input type="radio" id="doctorRadio" name="searchType" value="doctor" onclick="toggleInputFields()">
+            <label for="surgeryRadio">Search by Surgery:</label>
+            <input type="radio" id="surgeryRadio" name="searchType" value="surgery" onclick="toggleInputFields()">
+        </div>
+
+        <!-- Condition Query Fields -->
+        <div id="condition_input" style="display:none;">
+            <label for="condition_name_select">Condition Name:</label>
+            <select id="condition_name_select" name="condition_name">
+                  <option value="">Select a Condition</option>
+                  <option value="Alzheimer's disease">Alzheimer's disease</option>
+                  <option value="Anxiety">Anxiety</option>
+                  <option value="Arthritis">Arthritis</option>
+                  <option value="Asthma">Asthma</option>
+                  <option value="Back Pain">Back Pain</option>
+                  <option value="Beriberi">Beriberi</option>
+                  <option value="Bipolar Disorder">Bipolar Disorder</option>
+                  <option value="Bone Fracture">Bone Fracture</option>
+                  <option value="Bronchitis">Bronchitis</option>
+                  <option value="Cholera">Cholera</option>
+                  <option value="Cold">Cold</option>
+                  <option value="Dengue Fever">Dengue Fever</option>
+                  <option value="Dermatitis">Dermatitis</option>
+                  <option value="Diabetes">Diabetes</option>
+                  <option value="Fever">Fever</option>
+                  <option value="Fungal Infections">Fungal Infections</option>
+                  <option value="Gastritis">Gastritis</option>
+                  <option value="Hypertension">Hypertension</option>
+                  <option value="Kidney Stones">Kidney Stones</option>
+                  <option value="Migraine">Migraine</option>
+                  <option value="Nausea">Nausea</option>
+                  <option value="Obesity">Obesity</option>
+                  <option value="Parkinson's Disease">Parkinson's Disease</option>
+                  <option value="Pneumonia">Pneumonia</option>
+                  <option value="Sepsis">Sepsis</option>
+                  <option value="Stroke">Stroke</option>
+                  <option value="Tuberculosis">Tuberculosis</option>
+                  <option value="Uterine Cancer">Uterine Cancer</option>
+                <!-- Add more conditions as needed -->
+            </select>
+        </div>
+
+        <!-- Doctor Query Fields -->
+        <div id="doctor_name" style="display:none;">
+            <label for="doctor_name_select">Doctor's Name:</label>
+            <select id="doctor_name_select" name="doctor_name">
+                <option value="">Your Doctor!!</option>
+                <option value="Abigail Williams">Abigail Williams</option>
+                <option value="Allison Baker">Allison Baker</option>
+                <option value="Allison Ramirez">Allison Ramirez</option>
+                <option value="Angela Simon">Angela Simon</option>
+                <option value="Angel Bennett">Angel Bennett</option>
+                <option value="Anthony Thomas">Anthony Thomas</option>
+                <option value="Anthony Turner">Anthony Turner</option>
+                <option value="Antonio Patterson">Antonio Patterson</option>
+                <option value="Austin Kerr MD">Austin Kerr MD</option>
+                <option value="Brandy Mosley">Brandy Mosley</option>
+                <option value="Breanna Jones">Breanna Jones</option>
+                <option value="Brenda Stark">Brenda Stark</option>
+                <option value="Carla Clark">Carla Clark</option>
+                <option value="Carolyn Stewart">Carolyn Stewart</option>
+                <option value="Charles Peterson">Charles Peterson</option>
+                <option value="Charles Villarreal">Charles Villarreal</option>
+                <option value="Christina Braun">Christina Braun</option>
+                <option value="Christina Scott">Christina Scott</option>
+                <option value="Christian Cortez">Christian Cortez</option>
+                <option value="Christine Porter">Christine Porter</option>
+                <option value="Christopher Neal">Christopher Neal</option>
+                <option value="Crystal Newman">Crystal Newman</option>
+                <option value="Cynthia Taylor">Cynthia Taylor</option>
+                <option value="Dalton Sanchez">Dalton Sanchez</option>
+                <option value="David Frank">David Frank</option>
+                <option value="David Hughes">David Hughes</option>
+                <option value="David Wilson">David Wilson</option>
+                <option value="Dawn Hogan">Dawn Hogan</option>
+                <option value="Deborah Finley">Deborah Finley</option>
+                <option value="Deborah Hill">Deborah Hill</option>
+                <option value="Derek Carter">Derek Carter</option>
+                <option value="Diana Martinez">Diana Martinez</option>
+                <option value="Edwin Schaefer">Edwin Schaefer</option>
+                <option value="Elizabeth Andrade MD">Elizabeth Andrade MD</option>
+                <option value="Eric Davis">Eric Davis</option>
+                <option value="Erin Morrison">Erin Morrison</option>
+                <option value="Grace Smith">Grace Smith</option>
+                <option value="Hannah Burton">Hannah Burton</option>
+                <option value="Hannah Silva">Hannah Silva</option>
+                <option value="Jeffrey Duncan">Jeffrey Duncan</option>
+                <option value="Jennifer Carlson">Jennifer Carlson</option>
+                <option value="John Carpenter">John Carpenter</option>
+                <option value="John Douglas">John Douglas</option>
+                <option value="John Perry">John Perry</option>
+                <option value="Johnny Clark">Johnny Clark</option>
+                <option value="Juan Johnson">Juan Johnson</option>
+                <option value="Justin Page">Justin Page</option>
+                <option value="Karla Jones">Karla Jones</option>
+                <option value="Katrina Kennedy">Katrina Kennedy</option>
+                <option value="Kerry Page">Kerry Page</option>
+                <option value="Kevin Ellis">Kevin Ellis</option>
+                <option value="Linda Alexander">Linda Alexander</option>
+                <option value="Lisa Kelly">Lisa Kelly</option>
+                <option value="Louis Baker">Louis Baker</option>
+                <option value="Louis Shelton">Louis Shelton</option>
+                <option value="Lynn Miles">Lynn Miles</option>
+                <option value="Mark Browning">Mark Browning</option>
+                <option value="Maureen Ryan">Maureen Ryan</option>
+                <option value="Melissa Hamilton">Melissa Hamilton</option>
+                <option value="Misty Diaz">Misty Diaz</option>
+                <option value="Monica Hamilton">Monica Hamilton</option>
+                <option value="Meagan Moore">Meagan Moore</option>
+                <option value="Michelle Short">Michelle Short</option>
+                <option value="Patricia Schneider">Patricia Schneider</option>
+                <option value="Patrick Berry">Patrick Berry</option>
+                <option value="Rachel Hernandez">Rachel Hernandez</option>
+                <option value="Richard Gay">Richard Gay</option>
+                <option value="Richard Lee">Richard Lee</option>
+                <option value="Robert Anderson">Robert Anderson</option>
+                <option value="Robert House">Robert House</option>
+                <option value="Robert Sims">Robert Sims</option>
+                <option value="Russell Cox">Russell Cox</option>
+                <option value="Sara Davis">Sara Davis</option>
+                <option value="Stephanie Allen">Stephanie Allen</option>
+                <option value="Stephen Contreras">Stephen Contreras</option>
+                <option value="Steven Butler">Steven Butler</option>
+                <option value="Steven Trujillo">Steven Trujillo</option>
+                <option value="Suzanne Thomas">Suzanne Thomas</option>
+                <option value="Sydney Flowers">Sydney Flowers</option>
+                <option value="Tammy Garcia">Tammy Garcia</option>
+                <option value="Tanya Liu">Tanya Liu</option>
+                <option value="Tina Lowe">Tina Lowe</option>
+                <option value="Travis Davis">Travis Davis</option>
+                <option value="Valerie Vincent">Valerie Vincent</option>
+                <option value="Virginia Tate">Virginia Tate</option>
+                <!-- Add more doctor names as needed -->
+            </select>
+        </div>
+
+        <!-- Surgery Query Fields -->
+        <div id="surgery_input" style="display:none;">
+            <label for="surgery_name_select">Surgery Name:</label>
+            <select id="surgery_name_select" name="surgery_name">
+                <option value="">Select a Surgery</option>
+                <option value="Appendectomy">Appendectomy</option>
+                  
+                  <option value="Breast Removal">Breast Removal</option>
+                  <option value="Cataract Surgery">Cataract Surgery</option>
+                  <option value="Dental Implants">Dental Implants</option>
+                  <option value="Ear Tube Insertion">Ear Tube Insertion</option>
+                  <option value="Gallbladder Removal">Gallbladder Removal</option>
+                  <option value="Heart Surgery">Heart Surgery</option>
+                  <option value="Hernia Repair">Hernia Repair</option>
+                  <option value="Knee Replacement">Knee Replacement</option>
+                  <option value="Knee Surgery">Knee Surgery</option>
+                  <option value="Laparoscopic Surgery">Laparoscopic Surgery</option>
+                  <option value="Nasal Surgery">Nasal Surgery</option>
+                  <option value="Sinus Surgery">Sinus Surgery</option>
+                  <option value="Skin Biopsy">Skin Biopsy</option>
+                  <option value="Thyroidectomy">Thyroidectomy</option>
+                  <option value="Vasectomy">Vasectomy</option>
+                  <option value="Wisdom Tooth Extraction">Wisdom Tooth Extraction</option>
+                <!-- Add more surgeries as needed -->
+            </select>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="patientData"></div>
+    <button type="button" onclick="downloadPDF()">Download as PDF</button>
+
+
+</body>
+</html>

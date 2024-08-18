@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Health Record Assistant</title>
+    <script src="{{ url_for('static', filename='script-pat.js') }}"></script>
+    <script>
+        function toggleInputFields() {
+            var queryType = document.querySelector('input[name="query_type"]:checked').value;
+            if (queryType === "single") {
+                document.getElementById('single_id').style.display = 'block';
+                document.getElementById('multiple_ids').style.display = 'none';
+            } else {
+                document.getElementById('single_id').style.display = 'none';
+                document.getElementById('multiple_ids').style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Patient Health Record Assistant</h1>
+    <form id="patientForm">
+        <label>
+            <input type="radio" name="query_type" value="single" checked onclick="toggleInputFields()"> Single Patient
+        </label>
+        <label>
+            <input type="radio" name="query_type" value="multiple" onclick="toggleInputFields()"> Multiple Patients
+        </label>
+
+        <div id="single_id">
+            <label for="id">Patient ID:</label>
+            <input type="text" id="patient_id" name="id">
+        </div>
+
+        <div id="multiple_ids" style="display: none;">
+            <label for="start_id">Start Patient ID:</label>
+            <input type="text" id="start_id" name="start_id">
+            <label for="end_id">End Patient ID:</label>
+            <input type="text" id="end_id" name="end_id">
+        </div>
+
+        <button type="button" onclick="getPatientData()">Submit</button>
+    </form>
+
+    <div id="patientData"></div>
+    <button type="button" onclick="downloadPDF()">Download as PDF</button>
+</body>
+</html>

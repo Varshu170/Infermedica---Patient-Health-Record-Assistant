@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Record</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+         .logout-btn {
+    position: absolute;
+    top: 20px; /* Adjust as needed */
+    right: 20px; /* Adjust as needed */
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.logout-btn:hover {
+    background-color: #0056b3;
+}
+        body {
+    background-color: #f5f7fa;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(rgba(245, 247, 250, 0.1), rgba(245, 247, 250, 0.1)),
+                url('static/prof.jpeg') no-repeat center center fixed;
+    background-size: cover; /* Ensures the image covers the entire viewport */
+    background-attachment: fixed; /* Keeps the background image fixed during scrolling */
+    background-position: center; /* Centers the background image */
+}
+
+        .card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Container for aligning headings in a straight line */
+.row.flex-equal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start; /* Align items at the start for consistency */
+}
+
+/* Adjusting the card title */
+.card-title {
+    font-weight: bold;
+    font-size: 1.25rem;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Ensure each card body fills the available space */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    flex-grow: 1;
+}
+
+/* Ensures that all cards in the row are of equal height */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.row.flex-equal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch; /* Ensures all items are stretched to the same height */
+}
+
+/* Ensure each card body fills the available space */
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* Specific height for Profile, Medical History, and Insurance Details */
+.card-body {
+    flex-grow: 1; /* Makes the body take up the remaining space */
+}
+
+/* Adding padding to the top and bottom of the heading for alignment */
+h5.card-title {
+    margin: 0;
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+}
+
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .col-md-4, .col-md-8 {
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        .col-md-4 {
+            flex: 0 0 33.3333%;
+            max-width: 33.3333%;
+        }
+
+        .col-md-8 {
+            flex: 0 0 66.6667%;
+            max-width: 66.6667%;
+        }
+
+        .card-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center-aligns items horizontally */
+    justify-content: center; /* Center-aligns items vertically, if needed */
+    text-align: center; /* Centers text inside the card-body */
+}
+
+
+        p {
+            margin-bottom: 10px;
+            font-size: 1rem;
+        }
+
+        h5 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        h6 {
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .profile-img {
+            width: 100%;
+            max-width: 150px;
+            height: auto;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 15px;
+        }
+
+        .insurance-container, .appointments-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .insurance-container .col-md-4, .appointments-container .col-md-8 {
+            margin-bottom: 0; /* To ensure no extra margin between sections */
+        }
+
+        /* Flexbox ensures equal height columns */
+        .row.flex-equal {
+            display: flex;
+        }
+
+        .row.flex-equal > [class*='col-'] {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card.full-height {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="row flex-equal">
+            <!-- Top Row -->
+            <div class="col-md-4">
+                <!-- Profile Card -->
+                <div class="card full-height">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-user"></i> Profile</h5>
+                        <img src="static/profile.jpg" alt="Profile Image" class="profile-img">
+
+                        <p><strong>Name:</strong> {{ patient.name.first }} {{ patient.name.last }}</p>
+                        <p><strong>Patient ID:</strong> {{ patient.id }}</p>
+                        <p><strong>Gender:</strong> {{ patient.gender }}</p>
+                        <p><strong>Age:</strong> {{ patient.age }}</p>
+                        <p><strong>Date of Birth:</strong> {{ patient.dob }}</p>
+                        <p><strong>Blood Group:</strong> {{ patient.blood_group }}</p>
+                        <p><strong>Weight:</strong> {{ patient.weight }}</p>
+                        <p><strong>Contact Phone:</strong> {{ patient.contact.phone }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Medical History Card -->
+                <div class="card full-height">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fa fa-plus-square"></i> Medical History</h5>
+                        <h6>Conditions</h6>
+                        {% for condition in patient.medical_history.conditions %}
+                            <p>{{ condition.name }} (Diagnosed: {{ condition.diagnosed_date }}, Status: {{ condition.status }})</p>
+                        {% endfor %}
+                        <h6>Surgeries</h6>
+                        {% for surgery in patient.medical_history.surgeries %}
+                            <p>{{ surgery.name }} (Date: {{ surgery.date }}, Outcome: {{ surgery.outcome }})</p>
+                        {% endfor %}
+                        <h6>Medications</h6>
+                        {% for medication in patient.medical_history.medications %}
+                            <p>{{ medication.name }} (Dose: {{ medication.dose }}, Frequency: {{ medication.frequency }}, Start Date: {{ medication.start_date }})</p>
+                        {% endfor %}
+                        <h6>Allergies</h6>
+                        {% for allergy in patient.medical_history.allergies %}
+                            <p>{{ allergy }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <!-- Insurance Details Card -->
+                <div class="card full-height">
+                    <div class="card-body">
+                       <h5 class="card-title"><i class="fas fa-credit-card"></i> Insurance Details</h5>
+                        <p><strong>Provider:</strong> {{ patient.insurance.provider }}</p>
+                        <p><strong>Policy Number:</strong> {{ patient.insurance.policy_number }}</p>
+                        <p><strong>Group Number:</strong> {{ patient.insurance.group_number }}</p>
+                        <p><strong>Effective Date:</strong> {{ patient.insurance.effective_date }}</p>
+                        <p><strong>Expiration Date:</strong> {{ patient.insurance.expiration_date }}</p>
+                        <p><strong>Nominee:</strong> {{ patient.insurance.nominee.name }} ({{ patient.insurance.nominee.relationship }})</p>
+                        <p><strong>Contact:</strong> {{ patient.insurance.nominee.contact }}</p>
+                        <p>
+                            {% if not patient.insurance.claimed_insurance %}
+                                No claimed insurance.
+                            {% else %}
+                                Claimed Insurance Details:
+                                {% for claim in patient.insurance.claimed_insurance %}
+                                    <br>Claim ID: {{ claim.claim_id }}, Date: {{ claim.date }}, Amount: {{ claim.amount }}, Status: {{ claim.status }}
+                                {% endfor %}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row flex-equal">
+            <!-- Bottom Row -->
+            <div class="col-md-4">
+                <!-- Daily Vitals Card -->
+                <div class="card full-height">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-heartbeat"></i> Daily Vitals</h5>
+                        {% for vital in patient.health_monitoring.daily_vitals %}
+                            <p><strong>Date:</strong> {{ vital.date }}</p>
+                            <p><strong>Blood Pressure:</strong> {{ vital.blood_pressure }}</p>
+                            <p><strong>Heart Rate:</strong> {{ vital.heart_rate }}</p>
+                            <p><strong>Temperature:</strong> {{ vital.temperature }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Personal Details Card -->
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fas fa-file-alt"></i> Personal Details</h5>
+
+                        <p><strong>Address:</strong> {{ patient.contact.address.street }}, {{ patient.contact.address.city }}, {{ patient.contact.address.state }}, {{ patient.contact.address.zip }}, {{ patient.contact.address.country }}</p>
+                        <p><strong>Emergency Contact:</strong> {{ patient.emergency_contact.name }}, {{ patient.emergency_contact.phone }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <!-- Appointments and Tests Card -->
+                <div class="card full-height">
+                    <div class="card-body">
+                        <h5 class="card-title"><i class="fa fa-user-md"></i> Appointments and Tests</h5>
+
+                        {% for appointment in patient.appointments %}
+                            <p><strong>Date:</strong> {{ appointment.date }}</p>
+                            <p><strong>Type:</strong> {{ appointment.type }}</p>
+                            <p><strong>Doctor:</strong> {{ appointment.doctor.name }} ({{ appointment.doctor.specialty }})</p>
+                            <p><strong>Contact Phone:</strong> {{ appointment.doctor.contact.phone }}</p>
+                            <p><strong>Address:</strong> {{ appointment.doctor.contact.address.street }}, {{ appointment.doctor.contact.address.city }}, {{ appointment.doctor.contact.address.state }}, {{ appointment.doctor.contact.address.zip }}, {{ appointment.doctor.contact.address.country }}</p>
+                            <p><strong>Notes:</strong> {{ appointment.notes }}</p>
+                            <h6>Lab Tests</h6>
+                            {% for test in appointment.lab_tests %}
+                                <p>{{ test.test_name }} (Date: {{ test.date }}, Findings: {{ test.results.findings }}, Conclusion: {{ test.results.conclusion }})</p>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div>
+    <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+</div>
+</body>
+</html>

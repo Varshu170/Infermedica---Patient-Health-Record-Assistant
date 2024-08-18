@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Search</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ url_for('static', filename='script-ins.js') }}"></script>
+</head>
+<body>
+    <h1>Search Insurance Details</h1>
+    <form id="search-form">
+        <label>
+            <input type="radio" name="search_by" value="insurance_name" checked> Search by Insurance Name
+        </label>
+        <label>
+            <input type="radio" name="search_by" value="claim_id"> Search by Claim ID
+        </label>
+        <br>
+        <label id="input-label">Insurance Name:</label>
+        <input type="text" id="search-input" name="input_value" required>
+        <br>
+        <button type="submit">Search</button>
+    </form>
+
+
+    <div id="result"></div>
+    <button id="download-btn" style="display:none;">Download as PDF</button>
+</body>
+</html>

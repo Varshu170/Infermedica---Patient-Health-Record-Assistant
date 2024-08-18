@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Information</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <h1>Healthcare Information</h1>
+    <div class="col-lg-4 py-3 wow fadeInUp">
+    <!-- Buttons to switch between different sections -->
+    <button id="btn-patients">Patients</button>
+    <button id="btn-doctors">Doctors</button>
+    <button id="btn-insurance">Insurance</button>
+    </div>
+    <!-- Placeholder to load content -->
+    <div id="content">
+        <!-- Default content (optional) -->
+        <p>Select a section above to view details.</p>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#btn-patients').click(function() {
+                $('#content').load('{{ url_for("patients_section") }}', function() {
+                    $.getScript("{{ url_for('static', filename='script-pat.js') }}");
+                });
+            });
+
+            $('#btn-doctors').click(function() {
+                $('#content').load('{{ url_for("doctors_section") }}', function() {
+                    $.getScript("{{ url_for('static', filename='script-doc.js') }}");
+                });
+            });
+
+            $('#btn-insurance').click(function() {
+                $('#content').load('{{ url_for("insurance_section") }}', function() {
+                    $.getScript("{{ url_for('static', filename='script-ins.js') }}");
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In / Sign Up</title>
+    <link rel="stylesheet" href="static/style-patient.css">
+</head>
+<body>
+    <div class="container">
+        <div class="signin-signup">
+            <div class="signin">
+                <h2>Sign in</h2>
+                <form action="{{ url_for('login') }}" method="POST">
+                    <label for="role">Role:</label>
+                    <select name="role" id="role" required>
+                        <option value="patient">Patient</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="insurance">Insurance</option>
+                    </select>
+
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username" required>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" required>
+
+                    <button type="submit" class="login-btn">Login</button>
+                </form>
+
+            </div>
+            <div class="signup">
+                <h2><em>Access Your Health Insights <br>with a Click!!</br></h2>
+                <img src="static/ss.png" alt="Sign Up">
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='script-login.js') }}"></script>
+</body>
+</html>
